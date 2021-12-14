@@ -25,7 +25,7 @@ namespace TestsGeneratorLib
                 }
 
                 CompilationUnitSyntax unit = CompilationUnit().WithUsings(GetImports())
-                    .AddMembers(NamespaceDeclaration(ParseName("Testss")).AddMembers(testClass));
+                    .AddMembers(NamespaceDeclaration(ParseName("Tests")).AddMembers(testClass));
                 list.Add(new TestUnit($"{syntax.Identifier.ValueText}Tests.cs",
                     unit.NormalizeWhitespace().ToFullString()));
             }
