@@ -20,7 +20,7 @@ namespace TestsGenerator2
 
             TransformManyBlock<string, TestUnit> createTestsBlock = new TransformManyBlock<string, TestUnit>
             (
-            async sourceCode => await Task.Run(() => generator.CreateTests(sourceCode).ToArray()),
+            async sourceCode => await dsTask.Run(() => generator.CreateTests(sourceCode).ToArray()),
              blockOptions
             );
 
@@ -28,7 +28,7 @@ namespace TestsGenerator2
             ActionBlock<TestUnit> saveTestsBlock = new ActionBlock<TestUnit>
             (
                 async testsFile =>
-                    await File.WriteAllTextAsync("..\\..\\..\\..\\GeneratedTestss\\" + testsFile.FileName,
+                    await File.WriteAllTextAsync("..\\..\\..\\..\\GeneratedTests\\" + testsFile.FileName,
                         testsFile.Source),
                 blockOptions
             );
