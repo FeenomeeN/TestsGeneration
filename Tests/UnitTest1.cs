@@ -23,7 +23,7 @@ namespace Tests
             _methodList = new List<string> { "GetTraceResultTest", "StartTraceTest", "StopTraceTest" };
 
             Generator generator = new Generator();
-            List<TestUnit> testFiles = generator.CreateTests(File.ReadAllText("..\\..\\..\\..\\Files\\Tracer.cs"));
+            List<TestUnit> testFiles = generator.CreateTests(File.ReadAllText("..\\..\\..\\..\\Filess\\Tracer.cs"));
 
             _roots = new List<SyntaxNode>();
             foreach (TestUnit testFile in testFiles)
