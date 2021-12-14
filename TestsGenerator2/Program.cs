@@ -20,7 +20,7 @@ namespace TestsGenerator2
 
             TransformManyBlock<string, TestUnit> createTestsBlock = new TransformManyBlock<string, TestUnit>
             (
-            async sourceCode => await dsTask.Run(() => generator.CreateTests(sourceCode).ToArray()),
+            async sourceCode => await Task.Run(() => generator.CreateTests(sourceCode).ToArray()),
              blockOptions
             );
 

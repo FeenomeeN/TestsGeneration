@@ -26,7 +26,7 @@ namespace TestsGeneratorLib
 
                 CompilationUnitSyntax unit = CompilationUnit().WithUsings(GetImports())
                     .AddMembers(NamespaceDeclaration(ParseName("Tests")).AddMembers(testClass));
-                list.Add(new TestUnit($"{syntax.Identifier.ValueText}Tests.cs",
+                list.Add(new TestUnit($"{syntax.Identifier.ValueText}Test.cs",
                     unit.NormalizeWhitespace().ToFullString()));
             }
 
@@ -49,7 +49,7 @@ namespace TestsGeneratorLib
 
         private ClassDeclarationSyntax CreateTestClass(string className)
         {
-            AttributeSyntax attribute = Attribute(ParseName("TestClassName"));
+            AttributeSyntax attribute = Attribute(ParseName("TestClass"));
             return ClassDeclaration(className + "Test")
                 .AddModifiers(Token(SyntaxKind.PublicKeyword))
                 .AddAttributeLists(AttributeList().AddAttributes(attribute));
