@@ -49,7 +49,7 @@ namespace TestsGeneratorLib
 
         private ClassDeclarationSyntax CreateTestClass(string className)
         {
-            AttributeSyntax attribute = Attribute(ParseName("TestClass"));
+            AttributeSyntax attribute = Attribute(ParseName("TestClassName"));
             return ClassDeclaration(className + "Test")
                 .AddModifiers(Token(SyntaxKind.PublicKeyword))
                 .AddAttributeLists(AttributeList().AddAttributes(attribute));
