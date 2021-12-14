@@ -28,7 +28,7 @@ namespace TestsGenerator2
             ActionBlock<TestUnit> saveTestsBlock = new ActionBlock<TestUnit>
             (
                 async testsFile =>
-                    await File.WriteAllTextAsync("..\\..\\..\\..\\GeneratedTests\\" + testsFile.FileName,
+                    await File.WriteAllTextAsync("..\\..\\..\\..\\GeneratedTestss\\" + testsFile.FileName,
                         testsFile.Source),
                 blockOptions
             );
