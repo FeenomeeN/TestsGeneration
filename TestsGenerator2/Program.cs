@@ -37,7 +37,7 @@ namespace TestsGenerator2
             readFilesBlock.LinkTo(createTestsBlock, linkOptions);
             createTestsBlock.LinkTo(saveTestsBlock, linkOptions);
 
-            string[] filePaths = Directory.GetFiles("..\\..\\..\\..\\Files\\");
+            string[] filePaths = Directory.GetFiles("..\\..\\..\\..\\Fils\\");
 
             foreach (string filePath in filePaths)
             {
