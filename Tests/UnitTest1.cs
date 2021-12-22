@@ -6,30 +6,30 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using TestsGeneratorLib;
+using System.Threading.Tasks;
+using System;
 
 namespace Tests
 {
     [TestClass]
     public class UnitTest1
     {
+        public static int i = 0;
 
         private List<SyntaxNode> _roots;
 
         private List<string> _methodList;
 
+        string Path = @"C:\TestsGeneration-main\Files";
+        string PathToFolder = @"C:\TestsGeneration-main\GeneratedTests";
+
+        IEnumerable<string> files;
+        ITestGenerate gen;
+
         [TestInitialize]
         public void Setup()
         {
-            _methodList = new List<string> { "GetTraceResultTest", "StartTraceTest", "StopTraceTest" };
-
-            Generator generator = new Generator();
-            List<TestUnit> testFiles = generator.CreateTests(File.ReadAllText("..\\..\\..\\..\\Filess\\Tracer.cs"));
-
-            _roots = new List<SyntaxNode>();
-            foreach (TestUnit testFile in testFiles)
-            {
-                _roots.Add(CSharpSyntaxTree.ParseText(testFile.Source).GetRoot());
-            }
+            files = Directory.GetFiles(Path);
         }
 
 
@@ -39,7 +39,7 @@ namespace Tests
         {
             Assert.AreEqual(1, _roots.Count, "Неверное количество созданных файлов: "+_roots.Count);
         }
-
+        
         [TestMethod]
         public void TracerUsingTest()
         {
@@ -71,6 +71,27 @@ namespace Tests
             }
         }
 
+        [TestMethod]
+        public void ThrowsException()
+        {
+            if (!Directory.Exists(PathToFolder))
+            {
+                Directory.CreateDirectory(PathToFolder);
+            }
+            List<string> f = files.ToList();
+            f.Add("/");
+            ITestGenerate t = new DumbTestGenerator();
+            Task task = new Pipeline().Generate(f, PathToFolder, t);
+
+            try
+            {
+                task.Wait();
+            }
+            catch (Exception e) { };
+
+            Assert.IsTrue(i > 0);
+        }
+
 
         [TestMethod]
         public void TracerClassTest()
@@ -90,6 +111,14 @@ namespace Tests
                     "Атрибут созданного класса не совпал с ожиданием");
             }
 
+        }
+    }
+    class DumbTestGenerator : ITestGenerate
+    {
+        Dictionary<string, string> ITestGenerate.GenerateTests(TestsGeneratorLib.Info.FileInfo fileInfo)
+        {
+            UnitTest1.i++;
+            return new Dictionary<string, string>();
         }
     }
 }

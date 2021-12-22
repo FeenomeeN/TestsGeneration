@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis.CSharp;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
+using TestsGeneratorLib;
 
 namespace TestsGeneratorLib
 {
@@ -70,4 +71,5 @@ namespace TestsGeneratorLib
         }
 
     }
+    
 }
